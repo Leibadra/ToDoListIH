@@ -1,6 +1,40 @@
 <template>
-    <h1>Esta es la vista de SignUp/In</h1>
-    <button @click="handleSignUp">Sign Up</button>
+  <div>
+    <h2>Entra tu mail y contraseña para ingresar</h2>
+    <form @submit.prevent='handleSignUp'>
+      <div>
+        <label for='email'>Email
+        <input
+          v-model='Email'
+          type='text'
+          placeholder='Enter Email'
+          name='email'
+          required
+        />
+        </label>
+      </div>
+      <div>
+        <label for='password'>Password
+        <input
+          v-model='PasswordValue'
+          type='password'
+          placeholder='Enter password'
+          name='password'
+          required
+        />
+        </label>
+      </div>
+      <div>
+        <button type='submit' @click='handleSignUp'>Sign Up</button>
+        <span id='emailID' ref='1' style='display: none'>
+          {{ EmailValue }}
+        </span>
+        <span id='passwordID' ref='2' style='display: none'>
+          {{ PasswordValue }}
+        </span>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -8,7 +42,13 @@ import { mapState, mapActions } from 'pinia';
 import userStore from '@/store/user';
 
 export default {
-  name: 'AuthView',
+  name: 'Login-vue',
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
   computed: {
     ...mapState(userStore, ['user']),
   },
@@ -16,8 +56,8 @@ export default {
     ...mapActions(userStore, ['signUp']),
     handleSignUp() {
       const userData = {
-        email: 'leila.badra@hotmail.com',
-        password: 'pruebasignup',
+        emailValue: '',
+        PasswordValue: '',
       };
       this.signUp(userData.email, userData.password);
     },
