@@ -3,35 +3,44 @@
     <h2>Entra tu mail y contraseña para ingresar</h2>
     <form @submit.prevent='handleSignUp'>
       <div>
-        <label for='email'>Email
-        <input
-          v-model='Email'
-          type='text'
-          placeholder='Enter Email'
-          name='email'
-          required
-        />
+        <label for='email'
+          >Email
+          <input
+            v-model='email'
+            type='email'
+            placeholder='Enter Email'
+            name='email'
+           />
         </label>
       </div>
       <div>
-        <label for='password'>Password
-        <input
-          v-model='PasswordValue'
-          type='password'
-          placeholder='Enter password'
-          name='password'
-          required
-        />
+        <label for='password'
+          >Password
+          <input
+            v-model='password'
+            type='password'
+            id='password'
+            placeholder='Enter password'
+            name='password'
+          />
+        </label>
+      </div>
+      <div>
+        <label for='confirmPassword'
+          >Confirm Password
+          <input
+            v-model='confirmPassword'
+            type='password'
+            id='confirmPassword'
+            placeholder='Confirm password'
+            name='confirmPassword'
+            required
+          />
         </label>
       </div>
       <div>
         <button type='submit' @click='handleSignUp'>Sign Up</button>
-        <span id='emailID' ref='1' style='display: none'>
-          {{ EmailValue }}
-        </span>
-        <span id='passwordID' ref='2' style='display: none'>
-          {{ PasswordValue }}
-        </span>
+        <button type='submit' @click='handleSignIn'>Sign In</button>
       </div>
     </form>
   </div>
@@ -42,30 +51,41 @@ import { mapState, mapActions } from 'pinia';
 import userStore from '@/store/user';
 
 export default {
-  name: 'Login-vue',
+  name: 'AuthView.vue',
   data() {
     return {
       email: '',
       password: '',
+      confirmPassword: '',
     };
   },
   computed: {
     ...mapState(userStore, ['user']),
   },
   methods: {
-    ...mapActions(userStore, ['signUp']),
+    ...mapActions(userStore, ['signUp', 'signOut', 'signIn']),
     handleSignUp() {
+      if (this.password !== this.confirmPassword) {
+        console.log('las contrasenas no coinciden');
+        return;
+      }
       const userData = {
-        emailValue: '',
-        PasswordValue: '',
+        email: this.email,
+        Password: this.password,
       };
       this.signUp(userData.email, userData.password);
+    },
+    handleSignIn() {
+      const userData = {
+        email: this.email,
+        Password: this.password,
+      };
+      this.signIn(userData.email, userData.password);
     },
   },
   watch: {
     user() {
       if (this.user) {
-        console.log(this.user);
         this.$router.push({ path: '/' });
       }
     },
