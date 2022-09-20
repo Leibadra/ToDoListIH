@@ -1,32 +1,29 @@
 <template>
   <div>
     <h2>Sign In</h2>
-    <form @submit.prevent='handleSignIn'>
+    <form>
       <div>
         <label for='email'
           >Email
-          <input
-            v-model='email'
-            type='email'
-            placeholder='Enter Email'
-            name='email'
-          />
+          <input id='email' type='email' placeholder='email' v-model='email' />
         </label>
       </div>
       <div>
         <label for='password'
           >Password
           <input
-            v-model='password'
-            type='password'
             id='password'
-            placeholder='Enter password'
-            name='password'
+            placeholder='password'
+            type='password'
+            v-model='password'
           />
         </label>
       </div>
       <div>
-        <button type='submit' @click='handleSignIn'>Sign In</button>
+        <button type='button' @click='handleSignIn'>Sign In</button>
+        <router-link to='/signup'
+          >Dont have an account? Create it here</router-link
+        >
       </div>
     </form>
   </div>
@@ -37,7 +34,7 @@ import { mapState, mapActions } from 'pinia';
 import userStore from '@/store/user';
 
 export default {
-  name: 'AuthView.vue',
+  name: 'SignIn',
   data() {
     return {
       email: '',
@@ -50,11 +47,7 @@ export default {
   methods: {
     ...mapActions(userStore, ['signIn']),
     handleSignIn() {
-      const userData = {
-        email: this.email,
-        Password: this.password,
-      };
-      this.signIn(userData.email, userData.password);
+      this.signIn(this.email, this.password);
     },
   },
 };

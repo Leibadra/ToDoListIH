@@ -1,24 +1,26 @@
 <template>
-<SignIn />
+  <SignUp />
 </template>
 
 <script>
-import SignIn from '@/components/SignIn.vue';
 import { mapState, mapActions } from 'pinia';
 import userStore from '@/store/user';
+import SignUp from '@/components/SignUp.vue';
 
 export default {
+  name: 'SignUpView',
   data() {
     return {
       email: '',
       password: '',
+      confirmPassword: '',
     };
   },
   computed: {
     ...mapState(userStore, ['user']),
   },
   methods: {
-    ...mapActions(userStore, ['signIn']),
+    ...mapActions(userStore, ['signUp']),
   },
   watch: {
     user() {
@@ -27,6 +29,6 @@ export default {
       }
     },
   },
-  components: { SignIn },
+  components: { SignUp },
 };
 </script>

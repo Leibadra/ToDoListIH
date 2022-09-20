@@ -37,7 +37,7 @@ import { mapState, mapActions } from 'pinia';
 import userStore from '@/store/user';
 
 export default {
-  name: 'AuthView.vue',
+  name: 'sign-up',
   data() {
     return {
       email: '',

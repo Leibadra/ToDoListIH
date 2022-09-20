@@ -1,8 +1,8 @@
 <template>
-  <nav v-if="user !== null">
-    <router-link to="/">Home</router-link>
+  <nav v-if='user !== null'>
+    <router-link to='/'>Home</router-link>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
