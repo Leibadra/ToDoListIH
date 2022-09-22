@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       titleTask: '',
+      editedTask: null,
     };
   },
   computed: {
@@ -36,7 +37,7 @@ export default {
     ...mapState(userStore, ['user']),
   },
   methods: {
-    ...mapActions(taskStore, ['addTasks', 'deleteTask']),
+    ...mapActions(taskStore, ['addTasks', 'deleteTask', 'updateTask']),
     handleNewTask() {
       const newTask = {
         title: this.titleTask,

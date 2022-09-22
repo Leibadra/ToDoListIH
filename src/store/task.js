@@ -28,13 +28,16 @@ export default defineStore('tasks', {
       if (error) throw error;
       this.tasks.splice(taskindex, 1);
     },
-    async updateTask(id, taskindex) {
-      const { error } = await supabase
-        .from('tasks')
-        .update()
-        .match({ id });
-      if (error) throw error;
-      else this.tasks.push(taskindex, 1);
-    },
+    // async updateTask(id, taskIndexModi) {
+    //  const { data, error } = await supabase
+    //    .from('tasks')
+    //    .update(dataUpdate)
+    //    .match({ id });
+    //  if (error) throw error;
+    // this.tasks = this.tasks[index].name;
+    // this.editedTask = index;
+    // const taskIndexModi = this.tasks.findIndex((task) => task.id === id);
+    // this.tasks[taskIndex].title = data[0].title;
+    // },
   },
 });
