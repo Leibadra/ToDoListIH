@@ -1,8 +1,9 @@
 <template>
     <div>
         <h2>Sign Up</h2>
-        <form @submit.prevent='handleSignUp'>
-            <div>
+        <p>{{ errorMsg }}</p>
+        <form>
+                   <div>
                 <label for='email'>Email
                     <input id='email'
                     type='email'
@@ -28,7 +29,7 @@
                     v-model='confirmPassword' />
                 </label>
             </div>
-            <button @click='handleSignUp'>Sign Up</button>
+            <button type='button' @click='handleSignUp'>Sign Up</button>
         </form>
     </div>
 </template>
@@ -43,6 +44,7 @@ export default {
       email: '',
       password: '',
       confirmPassword: '',
+      errorMsg: '',
     };
   },
   computed: {
@@ -50,16 +52,20 @@ export default {
   },
   methods: {
     ...mapActions(userStore, ['signUp']),
-    handleSignUp() {
+    async handleSignUp() {
       if (this.password !== this.confirmPassword) {
-        console.log('Passwords dont match');
+        alert('passwords do not match');
         return;
       }
       const userData = {
         email: this.email,
         password: this.password,
       };
-      this.signUp(userData.email, userData.password);
+      try {
+        await this.signUp(userData.email, userData.password);
+      } catch (error) {
+        this.errorMsg = error.message;
+      }
     },
   },
 };

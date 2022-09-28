@@ -1,7 +1,7 @@
 <template>
   <div class='home'>
     <h1>Esta es la vista de home</h1>
-    <AddTasks />
+    <UseTasks />
     <SignOut />
   </div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 import { mapState, mapActions } from 'pinia';
 import taskStore from '@/store/task';
-import AddTasks from '@/components/AddTasks.vue';
+import UseTasks from '@/components/UseTasks.vue';
 import SignOut from '@/components/SignOut.vue';
 
 export default {
@@ -23,6 +23,6 @@ export default {
   created() {
     this.fetchTasks();
   },
-  components: { SignOut, AddTasks },
+  components: { SignOut, UseTasks },
 };
 </script>

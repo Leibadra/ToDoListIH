@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Sign In</h2>
+    <p>{{ errorMsg }}</p>
     <form>
       <div>
         <label for='email'
@@ -39,6 +40,7 @@ export default {
     return {
       email: '',
       password: '',
+      errorMsg: '',
     };
   },
   computed: {
@@ -46,8 +48,12 @@ export default {
   },
   methods: {
     ...mapActions(userStore, ['signIn']),
-    handleSignIn() {
-      this.signIn(this.email, this.password);
+    async handleSignIn() {
+      try {
+        await this.signIn(this.email, this.password);
+      } catch (error) {
+        this.errorMsg = error.message;
+      }
     },
   },
 };
