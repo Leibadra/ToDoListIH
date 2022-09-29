@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import AuthView from '../views/AuthView.vue';
 import SignUpView from '../views/SignUpView.vue';
-// import Register from '../views/RegisterView.vue';
-// import Login from '../views/Login.vue';
 
 const routes = [
   {

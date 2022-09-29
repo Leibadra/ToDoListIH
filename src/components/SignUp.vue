@@ -2,10 +2,10 @@
     <div>
         <h2>Sign Up</h2>
         <p>{{ errorMsg }}</p>
-        <form>
+        <form class="log-form">
                    <div>
                 <label for='email'>Email
-                    <input id='email'
+                    <input class="input-user-form" id='email'
                     type='email'
                     placeholder='email'
                     v-model='email'
@@ -14,7 +14,7 @@
             </div>
             <div>
                 <label for='password'>Password
-                    <input id='password'
+                    <input class="input-user-form" id='password'
                     placeholder='password'
                     type='password'
                     v-model='password'
@@ -23,13 +23,13 @@
             </div>
             <div>
                 <label for='confirmPassword'>Confirm Password
-                    <input id='confirmPassword'
+                    <input class="input-user-form" id='confirmPassword'
                     placeholder='Confirm Password'
                     type='password'
                     v-model='confirmPassword' />
                 </label>
             </div>
-            <button type='button' @click='handleSignUp'>Sign Up</button>
+            <button class="log-button" type='button' @click='handleSignUp'>Sign Up</button>
         </form>
     </div>
 </template>
@@ -54,7 +54,7 @@ export default {
     ...mapActions(userStore, ['signUp']),
     async handleSignUp() {
       if (this.password !== this.confirmPassword) {
-        alert('passwords do not match');
+        this.errorMsg = 'Passwords do not match';
         return;
       }
       const userData = {

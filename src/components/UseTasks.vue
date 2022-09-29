@@ -60,6 +60,7 @@ export default {
       };
       try {
         await this.addTasks(newTask);
+        this.titleTask = '';
       } catch (error) {
         this.errorMsg = error.message;
       }
@@ -82,7 +83,6 @@ export default {
       try {
         await this.updateTask(id, taskindex, title);
         this.isEditing = false;
-        this.taskIndex = 'Add task';
         this.selectedIndex = null;
         this.titleTask = '';
       } catch (error) {
