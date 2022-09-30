@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h2>Sign In</h2>
-    <p>{{ errorMsg }}</p>
     <form class="log-form">
+      <p>{{ errorMsg }}</p>
       <div>
         <label for='email'
           >Email

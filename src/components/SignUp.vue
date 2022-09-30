@@ -1,37 +1,47 @@
 <template>
-    <div>
-        <h2>Sign Up</h2>
-        <p>{{ errorMsg }}</p>
-        <form class="log-form">
-                   <div>
-                <label for='email'>Email
-                    <input class="input-user-form" id='email'
-                    type='email'
-                    placeholder='email'
-                    v-model='email'
-                    />
-                </label>
-            </div>
-            <div>
-                <label for='password'>Password
-                    <input class="input-user-form" id='password'
-                    placeholder='password'
-                    type='password'
-                    v-model='password'
-                    />
-                </label>
-            </div>
-            <div>
-                <label for='confirmPassword'>Confirm Password
-                    <input class="input-user-form" id='confirmPassword'
-                    placeholder='Confirm Password'
-                    type='password'
-                    v-model='confirmPassword' />
-                </label>
-            </div>
-            <button class="log-button" type='button' @click='handleSignUp'>Sign Up</button>
-        </form>
-    </div>
+  <div>
+    <form class='log-form'>
+      <p>{{ errorMsg }}</p>
+      <div>
+        <label for='email'
+          >Email
+          <input
+            class='input-user-form'
+            id='email'
+            type='email'
+            placeholder='email'
+            v-model='email'
+          />
+        </label>
+      </div>
+      <div>
+        <label for='password'
+          >Password
+          <input
+            class='input-user-form'
+            id='password'
+            placeholder='password'
+            type='password'
+            v-model='password'
+          />
+        </label>
+      </div>
+      <div>
+        <label for='confirmPassword'
+          >Confirm Password
+          <input
+            class='input-user-form'
+            id='confirmPassword'
+            placeholder='Confirm Password'
+            type='password'
+            v-model='confirmPassword'
+          />
+        </label>
+      </div>
+      <button class='log-button' type='button' @click='handleSignUp'>Sign Up</button>
+      <router-link to='/auth'>Already have an account? Sign in</router-link>
+    </form>
+  </div>
 </template>
 <script>
 import { mapState, mapActions } from 'pinia';

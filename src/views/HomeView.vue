@@ -1,9 +1,6 @@
 <template>
-  <div class='home'>
-    <h1>Hi {{ user }}</h1>
     <UseTasks />
     <SignOut />
-  </div>
 </template>
 
 <script>
