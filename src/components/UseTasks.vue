@@ -1,34 +1,52 @@
 <template>
-<div>
-    <h2>Tasks</h2>
-    <p>{{ errorMsg }}</p>
+  <div class='task-list'>
     <form>
-      <div v-if="!isEditing">
-        <label for='task'
-          >New task
-          <input id='task' type='text' placeholder='Add' v-model='titleTask' />
+      <p>{{ errorMsg }}</p>
+      <p>{{ errorMsgTwo }}</p>
+      <h3>Create to do</h3>
+      <div class='create-todo' v-if='!isEditing'>
+        <label for='task'>
+          <input class='input-tasks' id='task' type='text' placeholder='Add' v-model='titleTask' />
         </label>
-        <button type='button' @click='handleNewTask'>Add task</button>
+        <button class='add-todo-button' type='button' @click='handleNewTask'>Add task</button>
       </div>
       <div v-else>
-        <label for='task'
-        >New task
-          <input id='task' type='text' placeholder='Add task' v-model='titleTask' />
+        <label for='task'>
+          <input
+            class='input-tasks'
+            id='task'
+            type='text'
+            placeholder='Add task'
+            v-model='titleTask'
+          />
         </label>
-        <button type='button' @click='handleUpdate(taskId, taskIndex, titleTask)'>Update</button>
+        <button
+          class='add-todo-button'
+          type='button'
+          @click='handleUpdate(taskId, taskIndex, titleTask)'
+        >
+          Update
+        </button>
       </div>
     </form>
-    <ul>
-      <li v-for="(task, index) in tasks" :key="task.id" :id="task.id">
-        {{ task.title }}
-        <label for='is_complete'>Task completed
-        <input type='checkbox' id ='checkbox' v-model='is_complete' />
-        </label>
-        <button @click='handleDelete(task.id,index)'>Delete</button>
-        <button @click='editTodo(task.title,index,task.id) '>Edit</button>
-      </li>
-    </ul>
-</div>
+    <h3>To do list</h3>
+    <div class='todo-list'>
+      <div v-for='(task, index) in tasks' :key='task.id' :id='task.id'>
+        <div class='todo-content'>
+          <div>
+            {{ task.title }}
+            <label for='is_complete'>
+              <input class='checkbox' type='checkbox' id='checkbox' v-model='is_complete' />
+            </label>
+          </div>
+          <div>
+            <button class='delete' @click='handleDelete(task.id, index)'>delete</button>
+            <button class='edit' @click='editTodo(task.title, index, task.id)'>edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -45,6 +63,7 @@ export default {
       taskId: '',
       taskIndex: '',
       errorMsg: '',
+      errorMsgTwo: '',
     };
   },
   computed: {
@@ -62,7 +81,7 @@ export default {
         await this.addTasks(newTask);
         this.titleTask = '';
       } catch (error) {
-        this.errorMsg = error.message;
+        this.errorMsgTwo = 'Please add a task, cant save an empty fied';
       }
     },
     async handleDelete(id, index) {
@@ -92,3 +111,83 @@ export default {
   },
 };
 </script>
+
+<style>
+ul.todo-item {
+  margin: 0px;
+  padding: 0px;
+}
+
+li {
+  list-style: none;
+  text-decoration: none;
+  margin-right: 10%;
+}
+
+.add-todo-button {
+  background-color: #8fbc8f;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border: none;
+  border-radius: 0px 4px 4px 0px;
+}
+
+.input-tasks {
+  padding: 6px;
+}
+
+.add-todo-button:hover {
+  background-color: #3cb371;
+}
+
+.todo-list {
+  display: flex;
+  background-color: #FAEBD7;
+  height: 20px;
+  display: inline-table;
+  border-radius: 16px;
+  box-shadow: 0px 0px 4px grey;
+  justify-content: space-around;
+  flex-direction: row;
+  max-width: max-content;
+}
+
+.edit {
+  background-color: #8fbc8f;
+  color: #fffaf0;
+  padding: 15% 50% 15% 50%;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.edit:hover {
+  background-color: #3cb371;
+}
+.delete {
+  background-color: #8fbc8f;
+  color: #fffaf0;
+  padding: 15% 38% 15% 38%;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 5%;
+}
+.delete:hover {
+  background-color: #3cb371;
+}
+.checkbox {
+  background-color: aqua;
+  cursor: initial;
+  border-radius: 100%;
+  margin-top: 23%;
+}
+
+.todo-content {
+  margin: 30px;
+  display: flex;
+  width: 70%;
+  padding-left: -46px;
+}
+</style>
