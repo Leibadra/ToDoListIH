@@ -1,6 +1,6 @@
 <template>
   <nav v-if='user !== null'>
-    <router-link to='/'>Home</router-link>
+    {{ errorMsg }}
   </nav>
   <router-view />
 </template>
@@ -20,14 +20,13 @@ export default {
   async created() {
     try {
       await this.fetchUser();
-      console.log(this.user);
       if (!this.user) {
         this.$router.push({ path: '/auth' });
       } else {
         this.$router.push({ path: '/' });
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      this.errorMsg = error.message;
     }
   },
 };
@@ -35,19 +34,16 @@ export default {
 
 <style>
 #app {
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color:#2F4F4F;
 }
 
-body {
-  background-color: #2B2929;
-}
-
 .log-form {
     box-shadow: var(--color-box-shadow-large);
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,34 +51,35 @@ body {
     padding: 48px 32px;
     width: 50%;
     border-radius: 40px;
-    background-color: #f2f2f2;
+    background-color:#5F9EA0;
     margin:10% 22% 20% 22%;
-    box-shadow: 0px 0px 10px #f2f2f2;
+    box-shadow: 0px 0px 12px#A9A9A9;
   }
 
   .input-user-form{
   width: -webkit-fill-available;
+  background-color:white;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 100px;
-  box-shadow: 0px 0px 10px grey;
   display: flex;
 }
 
 .log-button{
-  background-color: #FF8C00;
-  color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   border-radius: 100px;
   cursor: pointer;
   width: -webkit-fill-available;
+  background-color: #5F9EA0;
+  color: white;
+  cursor: pointer;
 }
 .log-button:hover {
-  background-color: #8B008B;
+  background-color:  #3cb371;
 }
 
 nav {
@@ -93,4 +90,8 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
+p {
+color: red;
+font-size: 10px;
+}
 </style>
